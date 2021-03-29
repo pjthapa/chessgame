@@ -1,8 +1,6 @@
 from tkinter import *
 
-#create a list of all chess positions
-list_of_white_pieces =["White Rook", "White knight", "White Bishop","White Queen","White King","White Pawn"]
-list_of_black_pieces =["Black Rook", "Black knight", "Black Bishop","Black Queen","Black King","Black Pawn"]
+#create a list of all chess positions position as key and coordinates, background color and initial piece as vlaue
 board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green', "White Pawn"], 'A3': [200, 0, 'white', ""], 'A4': [300, 0, 'green', ""],
                      'A5': [400, 0, 'white', ""], 'A6': [500, 0, 'green', ""], 'A7': [600, 0, 'white', "Black Pawn"], 'A8': [700, 0, 'green', "Black Rook"],
                      'B8': [700, 100, 'white', "Black Knight"], 'B7': [600, 100, 'green', "Black Pawm"], 'B6': [500, 100, 'white', ""],
@@ -24,6 +22,9 @@ board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green',
                      'H8': [700, 700, 'white',"Black Rook"], 'H7': [600, 700, 'green',"Black Pawn"], 'H6': [500, 700, 'white', ""],
                      'H5': [400, 700, 'green', ""], 'H4': [300, 700, 'white', ""], 'H3': [200, 700, 'green', ""],
                      'H2': [100, 700, 'white',"White Pawn"], 'H1': [0, 700, 'green',"White Rook"]}
+selection = ""
+first_selected_button = None
+
 
 if __name__ =="__main__":
     #initialize ches board
@@ -39,14 +40,153 @@ if __name__ =="__main__":
     chess_board.geometry("800x800")
 
 
+    def click(button, button_str, piece):
+        global selection
+        global first_selected_button
+        if selection == "":
+            selection = piece
+            print("selected"+ selection)
+            first_selected_button = button
+        else:
+            button['text'] = str(selection)
+            board_coordinates[button_str][3] = ""
+            first_selected_button['text'] = board_coordinates[button_str][3]
+
+            selection = ""
+            first_selected_button = None
+
+
     #create the buttons
-
-    for key in board_coordinates:
-        button = Button(chess_board, text=board_coordinates.get(key)[3] , bg=board_coordinates.get(key)[2])
-        button.place(x=board_coordinates.get(key)[1], y=board_coordinates.get(key)[0], height=100, width=100)
-        #changing cartesian position of button in a snake manner
-
-
+    A1 = Button(chess_board, text=board_coordinates.get('A1')[3],
+                bg=board_coordinates.get('A1')[2], command= lambda: click(A1, "A1", board_coordinates.get('A1')[3]))
+    A1.place(x=board_coordinates.get('A1')[1], y=board_coordinates.get('A1')[0], height=100, width=100)
+    A2 = Button(chess_board, text=board_coordinates.get('A2')[3], bg=board_coordinates.get('A2')[2])
+    A2.place(x=board_coordinates.get('A2')[1], y=board_coordinates.get('A2')[0], height=100, width=100)
+    A3 = Button(chess_board, text=board_coordinates.get('A3')[3],
+                bg=board_coordinates.get('A3')[2], command= lambda: click(A3, "A3", board_coordinates.get('A3')[3]))
+    A3.place(x=board_coordinates.get('A3')[1], y=board_coordinates.get('A3')[0], height=100, width=100)
+    A4 = Button(chess_board, text=board_coordinates.get('A4')[3], bg=board_coordinates.get('A4')[2])
+    A4.place(x=board_coordinates.get('A4')[1], y=board_coordinates.get('A4')[0], height=100, width=100)
+    A5 = Button(chess_board, text=board_coordinates.get('A5')[3], bg=board_coordinates.get('A5')[2])
+    A5.place(x=board_coordinates.get('A5')[1], y=board_coordinates.get('A5')[0], height=100, width=100)
+    A6 = Button(chess_board, text=board_coordinates.get('A6')[3], bg=board_coordinates.get('A6')[2])
+    A6.place(x=board_coordinates.get('A6')[1], y=board_coordinates.get('A6')[0], height=100, width=100)
+    A7 = Button(chess_board, text=board_coordinates.get('A7')[3], bg=board_coordinates.get('A7')[2])
+    A7.place(x=board_coordinates.get('A7')[1], y=board_coordinates.get('A7')[0], height=100, width=100)
+    A8 = Button(chess_board, text=board_coordinates.get('A8')[3], bg=board_coordinates.get('A8')[2])
+    A8.place(x=board_coordinates.get('A8')[1], y=board_coordinates.get('A8')[0], height=100, width=100)
+    B8 = Button(chess_board, text=board_coordinates.get('B8')[3], bg=board_coordinates.get('B8')[2])
+    B8.place(x=board_coordinates.get('B8')[1], y=board_coordinates.get('B8')[0], height=100, width=100)
+    B7 = Button(chess_board, text=board_coordinates.get('B7')[3], bg=board_coordinates.get('B7')[2])
+    B7.place(x=board_coordinates.get('B7')[1], y=board_coordinates.get('B7')[0], height=100, width=100)
+    B6 = Button(chess_board, text=board_coordinates.get('B6')[3], bg=board_coordinates.get('B6')[2])
+    B6.place(x=board_coordinates.get('B6')[1], y=board_coordinates.get('B6')[0], height=100, width=100)
+    B5 = Button(chess_board, text=board_coordinates.get('B5')[3], bg=board_coordinates.get('B5')[2])
+    B5.place(x=board_coordinates.get('B5')[1], y=board_coordinates.get('B5')[0], height=100, width=100)
+    B4 = Button(chess_board, text=board_coordinates.get('B4')[3], bg=board_coordinates.get('B4')[2])
+    B4.place(x=board_coordinates.get('B4')[1], y=board_coordinates.get('B4')[0], height=100, width=100)
+    B3 = Button(chess_board, text=board_coordinates.get('B3')[3], bg=board_coordinates.get('B3')[2])
+    B3.place(x=board_coordinates.get('B3')[1], y=board_coordinates.get('B3')[0], height=100, width=100)
+    B2 = Button(chess_board, text=board_coordinates.get('B2')[3], bg=board_coordinates.get('B2')[2])
+    B2.place(x=board_coordinates.get('B2')[1], y=board_coordinates.get('B2')[0], height=100, width=100)
+    B1 = Button(chess_board, text=board_coordinates.get('B1')[3], bg=board_coordinates.get('B1')[2])
+    B1.place(x=board_coordinates.get('B1')[1], y=board_coordinates.get('B1')[0], height=100, width=100)
+    C1 = Button(chess_board, text=board_coordinates.get('C1')[3], bg=board_coordinates.get('C1')[2])
+    C1.place(x=board_coordinates.get('C1')[1], y=board_coordinates.get('C1')[0], height=100, width=100)
+    C2 = Button(chess_board, text=board_coordinates.get('C2')[3], bg=board_coordinates.get('C2')[2])
+    C2.place(x=board_coordinates.get('C2')[1], y=board_coordinates.get('C2')[0], height=100, width=100)
+    C3 = Button(chess_board, text=board_coordinates.get('C3')[3], bg=board_coordinates.get('C3')[2])
+    C3.place(x=board_coordinates.get('C3')[1], y=board_coordinates.get('C3')[0], height=100, width=100)
+    C4 = Button(chess_board, text=board_coordinates.get('C4')[3], bg=board_coordinates.get('C4')[2])
+    C4.place(x=board_coordinates.get('C4')[1], y=board_coordinates.get('C4')[0], height=100, width=100)
+    C5 = Button(chess_board, text=board_coordinates.get('C5')[3], bg=board_coordinates.get('C5')[2])
+    C5.place(x=board_coordinates.get('C5')[1], y=board_coordinates.get('C5')[0], height=100, width=100)
+    C6 = Button(chess_board, text=board_coordinates.get('C6')[3], bg=board_coordinates.get('C6')[2])
+    C6.place(x=board_coordinates.get('C6')[1], y=board_coordinates.get('C6')[0], height=100, width=100)
+    C7 = Button(chess_board, text=board_coordinates.get('C7')[3], bg=board_coordinates.get('C7')[2])
+    C7.place(x=board_coordinates.get('C7')[1], y=board_coordinates.get('C7')[0], height=100, width=100)
+    C8 = Button(chess_board, text=board_coordinates.get('C8')[3], bg=board_coordinates.get('C8')[2])
+    C8.place(x=board_coordinates.get('C8')[1], y=board_coordinates.get('C8')[0], height=100, width=100)
+    D8 = Button(chess_board, text=board_coordinates.get('D8')[3], bg=board_coordinates.get('D8')[2])
+    D8.place(x=board_coordinates.get('D8')[1], y=board_coordinates.get('D8')[0], height=100, width=100)
+    D7 = Button(chess_board, text=board_coordinates.get('D7')[3], bg=board_coordinates.get('D7')[2])
+    D7.place(x=board_coordinates.get('D7')[1], y=board_coordinates.get('D7')[0], height=100, width=100)
+    D6 = Button(chess_board, text=board_coordinates.get('D6')[3], bg=board_coordinates.get('D6')[2])
+    D6.place(x=board_coordinates.get('D6')[1], y=board_coordinates.get('D6')[0], height=100, width=100)
+    D5 = Button(chess_board, text=board_coordinates.get('D5')[3], bg=board_coordinates.get('D5')[2])
+    D5.place(x=board_coordinates.get('D5')[1], y=board_coordinates.get('D5')[0], height=100, width=100)
+    D4 = Button(chess_board, text=board_coordinates.get('D4')[3], bg=board_coordinates.get('D4')[2])
+    D4.place(x=board_coordinates.get('D4')[1], y=board_coordinates.get('D4')[0], height=100, width=100)
+    D3 = Button(chess_board, text=board_coordinates.get('D3')[3], bg=board_coordinates.get('D3')[2])
+    D3.place(x=board_coordinates.get('D3')[1], y=board_coordinates.get('D3')[0], height=100, width=100)
+    D2 = Button(chess_board, text=board_coordinates.get('D2')[3], bg=board_coordinates.get('D2')[2])
+    D2.place(x=board_coordinates.get('D2')[1], y=board_coordinates.get('D2')[0], height=100, width=100)
+    D1 = Button(chess_board, text=board_coordinates.get('D1')[3], bg=board_coordinates.get('D1')[2])
+    D1.place(x=board_coordinates.get('D1')[1], y=board_coordinates.get('D1')[0], height=100, width=100)
+    E1 = Button(chess_board, text=board_coordinates.get('E1')[3], bg=board_coordinates.get('E1')[2])
+    E1.place(x=board_coordinates.get('E1')[1], y=board_coordinates.get('E1')[0], height=100, width=100)
+    E2 = Button(chess_board, text=board_coordinates.get('E2')[3], bg=board_coordinates.get('E2')[2])
+    E2.place(x=board_coordinates.get('E2')[1], y=board_coordinates.get('E2')[0], height=100, width=100)
+    E3 = Button(chess_board, text=board_coordinates.get('E3')[3], bg=board_coordinates.get('E3')[2])
+    E3.place(x=board_coordinates.get('E3')[1], y=board_coordinates.get('E3')[0], height=100, width=100)
+    E4 = Button(chess_board, text=board_coordinates.get('E4')[3], bg=board_coordinates.get('E4')[2])
+    E4.place(x=board_coordinates.get('E4')[1], y=board_coordinates.get('E4')[0], height=100, width=100)
+    E5 = Button(chess_board, text=board_coordinates.get('E5')[3], bg=board_coordinates.get('E5')[2])
+    E5.place(x=board_coordinates.get('E5')[1], y=board_coordinates.get('E5')[0], height=100, width=100)
+    E6 = Button(chess_board, text=board_coordinates.get('E6')[3], bg=board_coordinates.get('E6')[2])
+    E6.place(x=board_coordinates.get('E6')[1], y=board_coordinates.get('E6')[0], height=100, width=100)
+    E7 = Button(chess_board, text=board_coordinates.get('E7')[3], bg=board_coordinates.get('E7')[2])
+    E7.place(x=board_coordinates.get('E7')[1], y=board_coordinates.get('E7')[0], height=100, width=100)
+    E8 = Button(chess_board, text=board_coordinates.get('E8')[3], bg=board_coordinates.get('E8')[2])
+    E8.place(x=board_coordinates.get('E8')[1], y=board_coordinates.get('E8')[0], height=100, width=100)
+    F8 = Button(chess_board, text=board_coordinates.get('F8')[3], bg=board_coordinates.get('F8')[2])
+    F8.place(x=board_coordinates.get('F8')[1], y=board_coordinates.get('F8')[0], height=100, width=100)
+    F7 = Button(chess_board, text=board_coordinates.get('F7')[3], bg=board_coordinates.get('F7')[2])
+    F7.place(x=board_coordinates.get('F7')[1], y=board_coordinates.get('F7')[0], height=100, width=100)
+    F6 = Button(chess_board, text=board_coordinates.get('F6')[3], bg=board_coordinates.get('F6')[2])
+    F6.place(x=board_coordinates.get('F6')[1], y=board_coordinates.get('F6')[0], height=100, width=100)
+    F5 = Button(chess_board, text=board_coordinates.get('F5')[3], bg=board_coordinates.get('F5')[2])
+    F5.place(x=board_coordinates.get('F5')[1], y=board_coordinates.get('F5')[0], height=100, width=100)
+    F4 = Button(chess_board, text=board_coordinates.get('F4')[3], bg=board_coordinates.get('F4')[2])
+    F4.place(x=board_coordinates.get('F4')[1], y=board_coordinates.get('F4')[0], height=100, width=100)
+    F3 = Button(chess_board, text=board_coordinates.get('F3')[3], bg=board_coordinates.get('F3')[2])
+    F3.place(x=board_coordinates.get('F3')[1], y=board_coordinates.get('F3')[0], height=100, width=100)
+    F2 = Button(chess_board, text=board_coordinates.get('F2')[3], bg=board_coordinates.get('F2')[2])
+    F2.place(x=board_coordinates.get('F2')[1], y=board_coordinates.get('F2')[0], height=100, width=100)
+    F1 = Button(chess_board, text=board_coordinates.get('F1')[3], bg=board_coordinates.get('F1')[2])
+    F1.place(x=board_coordinates.get('F1')[1], y=board_coordinates.get('F1')[0], height=100, width=100)
+    G1 = Button(chess_board, text=board_coordinates.get('G1')[3], bg=board_coordinates.get('G1')[2])
+    G1.place(x=board_coordinates.get('G1')[1], y=board_coordinates.get('G1')[0], height=100, width=100)
+    G2 = Button(chess_board, text=board_coordinates.get('G2')[3], bg=board_coordinates.get('G2')[2])
+    G2.place(x=board_coordinates.get('G2')[1], y=board_coordinates.get('G2')[0], height=100, width=100)
+    G3 = Button(chess_board, text=board_coordinates.get('G3')[3], bg=board_coordinates.get('G3')[2])
+    G3.place(x=board_coordinates.get('G3')[1], y=board_coordinates.get('G3')[0], height=100, width=100)
+    G4 = Button(chess_board, text=board_coordinates.get('G4')[3], bg=board_coordinates.get('G4')[2])
+    G4.place(x=board_coordinates.get('G4')[1], y=board_coordinates.get('G4')[0], height=100, width=100)
+    G5 = Button(chess_board, text=board_coordinates.get('G5')[3], bg=board_coordinates.get('G5')[2])
+    G5.place(x=board_coordinates.get('G5')[1], y=board_coordinates.get('G5')[0], height=100, width=100)
+    G6 = Button(chess_board, text=board_coordinates.get('G6')[3], bg=board_coordinates.get('G6')[2])
+    G6.place(x=board_coordinates.get('G6')[1], y=board_coordinates.get('G6')[0], height=100, width=100)
+    G7 = Button(chess_board, text=board_coordinates.get('G7')[3], bg=board_coordinates.get('G7')[2])
+    G7.place(x=board_coordinates.get('G7')[1], y=board_coordinates.get('G7')[0], height=100, width=100)
+    G8 = Button(chess_board, text=board_coordinates.get('G8')[3], bg=board_coordinates.get('G8')[2])
+    G8.place(x=board_coordinates.get('G8')[1], y=board_coordinates.get('G8')[0], height=100, width=100)
+    H8 = Button(chess_board, text=board_coordinates.get('H8')[3], bg=board_coordinates.get('H8')[2])
+    H8.place(x=board_coordinates.get('H8')[1], y=board_coordinates.get('H8')[0], height=100, width=100)
+    H7 = Button(chess_board, text=board_coordinates.get('H7')[3], bg=board_coordinates.get('H7')[2])
+    H7.place(x=board_coordinates.get('H7')[1], y=board_coordinates.get('H7')[0], height=100, width=100)
+    H6 = Button(chess_board, text=board_coordinates.get('H6')[3], bg=board_coordinates.get('H6')[2])
+    H6.place(x=board_coordinates.get('H6')[1], y=board_coordinates.get('H6')[0], height=100, width=100)
+    H5 = Button(chess_board, text=board_coordinates.get('H5')[3], bg=board_coordinates.get('H5')[2])
+    H5.place(x=board_coordinates.get('H5')[1], y=board_coordinates.get('H5')[0], height=100, width=100)
+    H4 = Button(chess_board, text=board_coordinates.get('H4')[3], bg=board_coordinates.get('H4')[2])
+    H4.place(x=board_coordinates.get('H4')[1], y=board_coordinates.get('H4')[0], height=100, width=100)
+    H3 = Button(chess_board, text=board_coordinates.get('H3')[3], bg=board_coordinates.get('H3')[2])
+    H3.place(x=board_coordinates.get('H3')[1], y=board_coordinates.get('H3')[0], height=100, width=100)
+    H2 = Button(chess_board, text=board_coordinates.get('H2')[3], bg=board_coordinates.get('H2')[2])
+    H2.place(x=board_coordinates.get('H2')[1], y=board_coordinates.get('H2')[0], height=100, width=100)
+    H1 = Button(chess_board, text=board_coordinates.get('H1')[3], bg=board_coordinates.get('H1')[2])
+    H1.place(x=board_coordinates.get('H1')[1], y=board_coordinates.get('H1')[0], height=100, width=100)
 
     chess_board.mainloop()
 
