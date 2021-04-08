@@ -1,4 +1,5 @@
 from tkinter import *
+from chess_game import game_engine
 
 #create a list of all chess positions position as key and coordinates, background color and initial piece as vlaue
 board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green', "White Pawn"], 'A3': [200, 0, 'white', ""], 'A4': [300, 0, 'green', ""],
@@ -26,6 +27,40 @@ selection = ""
 first_selected_button = None
 first_selected_button = ""
 
+# def check_legal_move(piece, )
+
+def click(button_clicked, button_str_clicked, piece_in_clicked_square):
+    global selection
+    global first_selected_button
+    global first_selected_button_string
+
+    # check if click is on empty space or not
+    if selection == "" and piece_in_clicked_square != "":
+
+        # update selected piece
+        selection = piece_in_clicked_square
+        #print("selected"+ selection)
+
+        # save the selected position and associated variable
+        first_selected_button = button_clicked
+        first_selected_button_string = button_str_clicked
+        #print(board_coordinates[button_str][3])
+    else:
+        #check if move is legal
+        if game_engine(selection, first_selected_button_string, button_str_clicked).legal_move():
+            # update button text and dictionary to selected
+            print("It's a legal move!")
+            button_clicked['text'] = str(selection)
+            board_coordinates[button_str_clicked][3] = str(selection)
+
+            # update old button and dictionary to nothing
+            board_coordinates[first_selected_button_string][3] = ""
+            first_selected_button['text'] = ""
+
+            # reset selection and first click
+            selection = ""
+            first_selected_button = None
+
 
 if __name__ =="__main__":
     #initialize ches board
@@ -40,35 +75,6 @@ if __name__ =="__main__":
     #create dimension of the GUI
     chess_board.geometry("800x800")
 
-
-    def click(button, button_str, piece):
-        global selection
-        global first_selected_button
-        global first_selected_button_string
-
-        #check if click is on empty space or not
-        if selection == "" and piece != "":
-
-            #update selected piece
-            selection = piece
-            # print("selected"+ selection)
-
-            #save the selected position and associated variable
-            first_selected_button = button
-            first_selected_button_string = button_str
-            # print(board_coordinates[button_str][3])
-        else:
-            #update button text and dictionary to selected
-            button['text'] = str(selection)
-            board_coordinates[button_str][3] = str(selection)
-
-            #update old button and dictionary to nothing
-            board_coordinates[first_selected_button_string][3] = ""
-            first_selected_button['text'] = ""
-
-            #reset selection and first click
-            selection = ""
-            first_selected_button = None
 
 
     #create the buttons
