@@ -1,12 +1,12 @@
 from tkinter import *
-from chess_game import game_engine
+from chess_logic import game_engine
 
 #create a list of all chess positions position as key and coordinates, background color and initial piece as vlaue
 board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green', "White Pawn"], 'A3': [200, 0, 'white', ""], 'A4': [300, 0, 'green', ""],
                      'A5': [400, 0, 'white', ""], 'A6': [500, 0, 'green', ""], 'A7': [600, 0, 'white', "Black Pawn"], 'A8': [700, 0, 'green', "Black Rook"],
                      'B8': [700, 100, 'white', "Black Knight"], 'B7': [600, 100, 'green', "Black Pawm"], 'B6': [500, 100, 'white', ""],
                      'B5': [400, 100, 'green',""], 'B4': [300, 100, 'white', ""], 'B3': [200, 100, 'green', ""],
-                     'B2': [100, 100, 'white',"White Pawn"], 'B1': [0, 100, 'green',"White knight"], 'C1': [0, 200, 'white',"White Bishop"],
+                     'B2': [100, 100, 'white',"White Pawn"], 'B1': [0, 100, 'green',"White Knight"], 'C1': [0, 200, 'white',"White Bishop"],
                      'C2': [100, 200, 'green',"White Pawn"], 'C3': [200, 200, 'white', ""], 'C4': [300, 200, 'green', ""],
                      'C5': [400, 200, 'white', ""], 'C6': [500, 200, 'green', ""], 'C7': [600, 200, 'white', "Black Pawn"],
                      'C8': [700, 200, 'green', "Black Bishop"], 'D8': [700, 300, 'white', "Black King"], 'D7': [600, 300, 'green', "Black Pawn"],
@@ -17,9 +17,9 @@ board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green',
                      'E7': [600, 400, 'white', "Black Pawn"], 'E8': [700, 400, 'green', "Black Queen"], 'F8': [700, 500, 'white', "Black Bishop"],
                      'F7': [600, 500, 'green', "Black Pawn"], 'F6': [500, 500, 'white', ""], 'F5': [400, 500, 'green', ""],
                      'F4': [300, 500, 'white', ""], 'F3': [200, 500, 'green', ""], 'F2': [100, 500, 'white', "White Pawn"],
-                     'F1': [0, 500, 'green',"White Bishop"], 'G1': [0, 600, 'white',"White knight"], 'G2': [100, 600, 'green',"White Pawn"],
+                     'F1': [0, 500, 'green',"White Bishop"], 'G1': [0, 600, 'white',"White Knight"], 'G2': [100, 600, 'green',"White Pawn"],
                      'G3': [200, 600, 'white', ""], 'G4': [300, 600, 'green',""], 'G5': [400, 600, 'white', ""],
-                     'G6': [500, 600, 'green', ""], 'G7': [600, 600, 'white', "Black Pawn"], 'G8': [700, 600, 'green',"Black Kinght"],
+                     'G6': [500, 600, 'green', ""], 'G7': [600, 600, 'white', "Black Pawn"], 'G8': [700, 600, 'green',"Black Knight"],
                      'H8': [700, 700, 'white',"Black Rook"], 'H7': [600, 700, 'green',"Black Pawn"], 'H6': [500, 700, 'white', ""],
                      'H5': [400, 700, 'green', ""], 'H4': [300, 700, 'white', ""], 'H3': [200, 700, 'green', ""],
                      'H2': [100, 700, 'white',"White Pawn"], 'H1': [0, 700, 'green',"White Rook"]}
@@ -49,7 +49,6 @@ def click(button_clicked, button_str_clicked, piece_in_clicked_square):
         #check if move is legal
         if game_engine(selection, first_selected_button_string, button_str_clicked).legal_move():
             # update button text and dictionary to selected
-            print("It's a legal move!")
             button_clicked['text'] = str(selection)
             board_coordinates[button_str_clicked][3] = str(selection)
 
@@ -58,6 +57,10 @@ def click(button_clicked, button_str_clicked, piece_in_clicked_square):
             first_selected_button['text'] = ""
 
             # reset selection and first click
+            selection = ""
+            first_selected_button = None
+        else:
+            #if move is illegal, reset selection and first click
             selection = ""
             first_selected_button = None
 
