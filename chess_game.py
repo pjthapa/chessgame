@@ -17,6 +17,10 @@ class game_engine():
             return self.bishop_move_check(self.starting_position, self.ending_position)
         if self.selected_piece =="White Queen" or self.selected_piece =="Black Queen":
             return self.queen_move_check(self.starting_position, self.ending_position)
+        if self.selected_piece =="White King" or self.selected_piece =="Black King":
+            return self.king_move_check(self.starting_position, self.ending_position)
+        if self.selected_piece =="White Knight" or self.selected_piece =="Black Knight":
+            return self.knight_move_check(self.starting_position, self.ending_position)
     def pawn_move_check(self, position):
         return position_into_tuple.get(position)[1]
     def rook_move_check(self, starting_position, ending_position):
@@ -33,6 +37,17 @@ class game_engine():
             return True
         else:
             return False
+    def king_move_check(self, starting_position, ending_position):
+        if abs(position_into_tuple.get(starting_position)[0] - position_into_tuple.get(ending_position)[0]) == 1 or abs(position_into_tuple.get(starting_position)[1] - position_into_tuple.get(ending_position)[1]):
+            return True
+        else:
+            return False
+    def knight_move_check(self, starting_position, ending_position):
+        if abs(position_into_tuple.get(starting_position)[0] - position_into_tuple.get(ending_position)[0]) ==2 and abs(position_into_tuple.get(starting_position)[1] - position_into_tuple.get(ending_position)[1])== 1:
+            return True
+        elif abs(position_into_tuple.get(starting_position)[0] - position_into_tuple.get(ending_position)[0]) ==1 and abs(position_into_tuple.get(starting_position)[1] - position_into_tuple.get(ending_position)[1])== 2:
+            return True
+
 
 
 
