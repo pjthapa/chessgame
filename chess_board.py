@@ -27,7 +27,10 @@ class game_engine():
     def pawn_move_check(self, position):
         return position_into_tuple.get(position)[1]
     def rook_move_check(self, starting_position, ending_position):
-        if position_into_tuple.get(starting_position)[0] == position_into_tuple.get(ending_position)[0] or position_into_tuple.get(starting_position)[1] == position_into_tuple.get(ending_position)[1]:
+        pieces_in_between = ""
+        for square in self.row_unblocked():
+            pieces_in_between += board_coordinates[square][3]
+        if position_into_tuple.get(starting_position)[0] == position_into_tuple.get(ending_position)[0] or position_into_tuple.get(starting_position)[1] == position_into_tuple.get(ending_position)[1] and pieces_in_between =="":
             return True
         else:
             return False
@@ -56,7 +59,7 @@ class game_engine():
         elif abs(position_into_tuple.get(starting_position)[0] - position_into_tuple.get(ending_position)[0]) ==1 and abs(position_into_tuple.get(starting_position)[1] - position_into_tuple.get(ending_position)[1])== 2:
             return True
     def unblocked_diagonal(self):
-        #function to return the string of all the squares in the path from starting position to ending position.
+        #function to return the string of all the diagonal squares in the path from starting position to ending position.
         positions_to_check = []
         starting_tuple = (position_into_tuple.get(self.starting_position)[0], position_into_tuple.get(self.starting_position)[1])
         for button in range (1, abs(position_into_tuple.get(self.starting_position)[0] - position_into_tuple.get(self.ending_position)[0])):
@@ -75,6 +78,25 @@ class game_engine():
 
         return positions_to_check
 
+    def row_unblocked(self):
+        #functtion to return the sting of all the row sqauares in the path from the starting position to the ending position
+        #emoty list of position strings to return to check
+        position_to_check = []
+        starting_tuple =(position_into_tuple.get(self.starting_position)[0], position_into_tuple.get(self.starting_position)[1])
+        #check if same row
+        if position_into_tuple.get(self.starting_position)[1] == position_into_tuple.get(self.ending_position)[1]:
+            #iterate through the number of squares in between
+            for button in range(1, abs(position_into_tuple.get(self.starting_position)[0]- position_into_tuple.get(self.ending_position)[0])):
+                #check if going up or down
+                if position_into_tuple.get(self.starting_position)[0] < position_into_tuple.get(self.ending_position)[0]:
+                    #change the tuple up by one square each time
+                    starting_tuple =(starting_tuple[0]+1, starting_tuple[1])
+                    position_to_check.append(list(position_into_tuple.keys())[list(position_into_tuple.values()).index(starting_tuple)])
+                else:
+                    #change the tuple down by one square each time
+                    starting_tuple =(starting_tuple[0]-1, starting_tuple[1])
+                    position_to_check.append(list(position_into_tuple.keys())[list(position_into_tuple.values()).index(starting_tuple)])
+        return position_to_check
 
 #create a list of all chess positions position as key and coordinates, background color and initial piece as vlaue
 board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green', "White Pawn"], 'A3': [200, 0, 'white', ""], 'A4': [300, 0, 'green', ""],
@@ -114,7 +136,7 @@ def click(button_clicked, button_str_clicked, piece_in_clicked_square):
 
         # update selected piece
         selection = piece_in_clicked_square
-        #print("selected"+ selection)
+        print("selected"+ selection)
 
         # save the selected position and associated variable
         first_selected_button = button_clicked
