@@ -28,7 +28,7 @@ class game_engine():
         return position_into_tuple.get(position)[1]
     def rook_move_check(self, starting_position, ending_position):
         pieces_in_between = ""
-        for square in self.row_unblocked():
+        for square in self.unblocked_row():
             pieces_in_between += board_coordinates[square][3]
         if position_into_tuple.get(starting_position)[0] == position_into_tuple.get(ending_position)[0] or position_into_tuple.get(starting_position)[1] == position_into_tuple.get(ending_position)[1] and pieces_in_between =="":
             return True
@@ -78,7 +78,7 @@ class game_engine():
 
         return positions_to_check
 
-    def row_unblocked(self):
+    def unblocked_row(self):
         #functtion to return the sting of all the row sqauares in the path from the starting position to the ending position
         #emoty list of position strings to return to check
         position_to_check = []
@@ -122,7 +122,7 @@ board_coordinates = {'A1': [0, 0, 'white',"White Rook"], 'A2': [100, 0, 'green',
                      'H2': [100, 700, 'white',"White Pawn"], 'H1': [0, 700, 'green',"White Rook"]}
 selection = ""
 first_selected_button = None
-first_selected_button = ""
+# first_selected_button = ""
 
 # def check_legal_move(piece, )
 
@@ -136,7 +136,7 @@ def click(button_clicked, button_str_clicked, piece_in_clicked_square):
 
         # update selected piece
         selection = piece_in_clicked_square
-        print("selected"+ selection)
+        # print("selected"+ selection)
 
         # save the selected position and associated variable
         first_selected_button = button_clicked
@@ -145,6 +145,7 @@ def click(button_clicked, button_str_clicked, piece_in_clicked_square):
     else:
         #check if move is legal
         if game_engine(selection, first_selected_button_string, button_str_clicked).legal_move():
+            assert button_clicked != first_selected_button
             # update button text and dictionary to selected
             button_clicked['text'] = str(selection)
             board_coordinates[button_str_clicked][3] = str(selection)
@@ -156,12 +157,13 @@ def click(button_clicked, button_str_clicked, piece_in_clicked_square):
             # reset selection and first click
             selection = ""
             first_selected_button = None
+
         else:
             #if move is illegal, reset selection and first click
             selection = ""
             first_selected_button = None
 
-
+#intitializing the board --- GUI is very difficult to work with.
 if __name__ =="__main__":
     #initialize ches board
     chess_board = Tk()
